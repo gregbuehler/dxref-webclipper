@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // a single image, this does not matter, but if you're going to embed
       // multiple external images in your page, then the absence of width/height
       // attributes causes the popup to resize multiple times.
-      imageResult.width = width;
+      imageResult.width = width*1.5;
       imageResult.height = height;
       imageResult.src = imageUrl;
       imageResult.hidden = false;

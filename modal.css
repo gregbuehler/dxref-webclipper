@@ -1,0 +1,33 @@
+#wco-modal {
+    margin: 0px;
+    border: 5px solid gray;
+    border-radius:14px;    
+    
+    font-size:smaller;
+    width: 200px;
+}
+
+#wco-modal-container {
+    position:absolute;        
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    border: 1px solid white;    
+    margin: 5px;  
+    border-radius:14px;  
+}
+
+#wco-content {
+    border:2px solid black;
+    border-radius:8px;
+    background:#ffffff;
+    padding:10px;
+}
+
+#wco-content .title {
+  font-size: medium;
+}
+
+#wco-content button {
+  width:150px;
+}
