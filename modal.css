@@ -11,7 +11,7 @@
     position:absolute;        
     top: 20px;
     right: 20px;
-    z-index: 1000;
+    z-index: 99999;
     border: 1px solid white;    
     margin: 5px;  
     border-radius:14px;  
@@ -24,10 +24,19 @@
     padding:10px;
 }
 
-#wco-content .title {
+#wco-content .title-label {
   font-size: medium;
 }
 
+#wco-title {
+    color: blue;
+}
 #wco-content button {
   width:150px;
+}
+
+#wco-content button {
+    background-color: gray;
+    color:white;    
+    margin: 2px;
 }
