@@ -17,6 +17,13 @@
     border-radius:14px;  
 }
 
+#wco-movebar {
+    width: 88%;
+    height: 10px;
+    background-color: #dddddd;
+
+}
+
 #wco-content {
     border:2px solid black;
     border-radius:8px;

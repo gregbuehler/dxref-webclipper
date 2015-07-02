@@ -2,6 +2,7 @@ var html =
 `<div id="wco-modal-container">
 <div id='wco-modal'>								
 	<div id='wco-content'>
+		<div id="wco-movebar"></div>
 		<span class='title-label'> TITLE: </span> <br>
 		<span id="wco-title"></span> <br>
 		<br>
