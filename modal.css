@@ -1,4 +1,4 @@
-#wco-modal {
+#dxrwc-modal {
     margin: 0px;
     border: 5px solid gray;
     border-radius:14px;    
@@ -7,7 +7,7 @@
     width: 200px;
 }
 
-#wco-modal-container {
+#dxrwc-modal-container {
     position:absolute;        
     top: 20px;
     right: 20px;
@@ -17,32 +17,30 @@
     border-radius:14px;  
 }
 
-#wco-movebar {
+#dxrwc-movebar {
     width: 88%;
     height: 10px;
     background-color: #dddddd;
 
 }
 
-#wco-content {
+#dxrwc-content {
     border:2px solid black;
     border-radius:8px;
     background:#ffffff;
     padding:10px;
 }
 
-#wco-content .title-label {
+#dxrwc-content .dxrwc-title-label {
   font-size: medium;
 }
 
-#wco-title {
+#dxrwc-title {
     color: blue;
 }
-#wco-content button {
-  width:150px;
-}
 
-#wco-content button {
+#dxrwc-content button {
+    width:150px;
     background-color: gray;
     color:white;    
     margin: 2px;

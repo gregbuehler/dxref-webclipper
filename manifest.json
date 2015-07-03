@@ -16,11 +16,5 @@
     "tabs",
     "activeTab",
     "*://*/*"
-  ]
-  //Don't insert into every page.
-  //   "content_scripts": [ {
-  //     "matches": ["*://*/*"],
-  //     "css": [],
-  //     "js": ["jquery-2.1.4.min.js","content_script.js"]
-  // }]
+  ]  
 }

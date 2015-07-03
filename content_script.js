@@ -1,46 +1,68 @@
 var html = 
-`<div id="wco-modal-container">
-<div id='wco-modal'>								
-	<div id='wco-content'>
-		<div id="wco-movebar"></div>
-		<span class='title-label'> TITLE: </span> <br>
-		<span id="wco-title"></span> <br>
+`<div id="dxrwc-modal-container">
+<div id='dxrwc-modal'>								
+	<div id='dxrwc-content'>
+		<div id="dxrwc-movebar"></div>
+		<span class='dxrwc-title-label'> TITLE: </span> <br>
+		<span id="dxrwc-title"></span> <br>
 		<br>
-		<button data-type='page'>Rip Page</button> <br>
-		<button data-type='sub-section'>Rip SelectedContent</button> <br>
-		<button data-type='selection'>Highlight Text Content</button> <br>
-		<button data-type='hide'>DONE</button> <br>
+		<button data-type='dxrwc-page'>Rip Page</button> <br>
+		<button data-type='dxrwc-sub-section'>Rip SelectedContent</button> <br>
+		<button data-type='dxrwc-selection'>Highlight Text Content</button> <br>
+		<button data-type='dxrwc-hide'>DONE</button> <br>
 	</div>		
 </div>
 </div>`;
+
+// DXRWC = Dr XRef Web Clipper
 
 // =================================================================
 // Supporting JS
 // =================================================================
 var responseCount = 0;
-var browserWrapper = {
+var handler = {
 
 
 	sendMessage : function(msg, type, responseCB) {
 		if (!type) {
 			type = null;
 		}
-		
-		//window.postMessage({ type: "WCO-CONTROLLER", msgtype: type, msg: msg }, "*");
-		chrome.runtime.sendMessage({extension: "WCO", type: type, msg: msg}, function(response) {
+				
+		chrome.runtime.sendMessage({extension: "DXRWC", type: type, msg: msg}, function(response) {
 			responseCount++;
 	  		if (responseCB) {
 	  			responseCB(responseCount,response);
 	  		}
 		});
+	},	
+	handleButtonClick: function(e) {
+		var value = $(e.target).attr('data-type');
+		if (value == 'dxrwc-hide') {			
+			$('#dxrwc-modal-container').hide();
+			return;
+		}		
+		handler.sendMessage("pressed "+value,"buttonInfo", printResponse)
+	},
+	handleMessage: function(request,sender,sendResponse) {
+		console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    	console.dir(request);
+
+   		if (request.extension != "DXRWC") {
+    		return;
+    	}	
+
+    	var title = request.msg.title;
+    	$('#dxrwc-title').text(title);
+   
+    	sendResponse({acknowledged: true, msg: request.msg});
 	}
-
-
-
 };
 
-
-
+var clickEventMap = {
+	'#dxrwc-modal-container button': handler.handleButtonClick
+};
 
 
 var printResponse=function(responseNumber,data) {
@@ -52,39 +74,12 @@ var init = function() {
 	var $html = $(html);
 	$('body').append($html);	
 
-	
+	for ( selector in clickEventMap) {
+		var clickHandler =  clickEventMap[selector];
+		$(selector).click(clickHandler);
+	};
 
-
-	$('#wco-modal-container button').click(function(e) {
-		var value = $(e.target).attr('data-type');
-		if (value == 'hide') {
-			console.log("DONE>>> HIDING");
-			$('#wco-modal-container').hide();
-			return;
-		}		
-		browserWrapper.sendMessage("pressed "+value,"buttonInfo", printResponse)
-	});
-
-
-	chrome.runtime.onMessage.addListener(
-  		function(request, sender, sendResponse) {
-    	console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    	console.dir(request);
-
-   		if (request.extension != "WCO") {
-    		return;
-    	}	
-
-    	var title = request.msg.title;
-    	console.log("TITLE: "+title);
-    	console.log(">>"+$('#wco-modal-container span.title').size())
-    	$('#wco-title').text(title);
-
-    
-    	sendResponse({acknowledged: true, msg: request.msg});
-  });
+	chrome.runtime.onMessage.addListener(handler.handleMessage);
 }
 
 
@@ -92,13 +87,9 @@ var init = function() {
 // =================================================================
 // MAIN
 // =================================================================
-if ($('#wco-modal-container').length == 0) {
+if ($('#dxrwc-modal-container').length == 0) {
 	init();
 }
 else {
-	$('#wco-modal-container').show();
+	$('#dxrwc-modal-container').show();
 }
-
-
-
-

@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(
                 "from the extension");
     console.dir(request);
 
-    if (request.extension != "WCO") {
+    if (request.extension != "DXRWC") {
     	return;
     }
 
@@ -67,7 +67,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 	}
 
 	setTimeout(function() {
-		chrome.tabs.sendMessage(tab.id, {extension: "WCO", type: "titleInfo", msg: info}, null, responseHandler);
+		chrome.tabs.sendMessage(tab.id, {extension: "DXRWC", type: "titleInfo", msg: info}, null, responseHandler);
 	},1000);
 
 });
