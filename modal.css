@@ -45,3 +45,11 @@
     color:white;    
     margin: 2px;
 }
+
+#dxrwc-content button.dxrwc-save:disabled {    
+    color:gray;
+    background-color: gray;
+}
+#dxrwc-content button.dxrwc-save {    
+    background-color: #66aa00;    
+}
